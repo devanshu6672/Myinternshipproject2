@@ -1,76 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <section class="container">
+    <header>Registration Form</header>
+    <form action="#" class="form" onsubmit="return validateForm(event)">
+      <div class="input-box">
+        <label>Full Name</label>
+        <input type="text" placeholder="Enter full name" required />
+      </div>
 
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <section class="container">
-      <header>Registration Form</header>
-      <form action="#" class="form">
+      <div class="input-box">
+        <label>Email Address</label>
+        <input type="text" placeholder="Enter email address" required id="email"/>
+        <p id="email-error"></p>
+      </div>
+
+      <div class="column">
         <div class="input-box">
-          <label>Full Name</label>
-          <input type="text" placeholder="Enter full name" required />
+          <label>Phone Number</label>
+          <input type="number" placeholder="Enter phone number" required id="phone" />
+          <p id="phone-error"></p>
         </div>
-
         <div class="input-box">
-          <label>Email Address</label>
-          <input type="text" placeholder="Enter email address" required />
+          <label>Birth Date</label>
+          <input type="date" placeholder="Enter birth date" required />
         </div>
+      </div>
 
+      <div class="gender-box">
+        <h3>Gender</h3>
+        <div class="gender-option">
+          <div class="gender">
+            <input type="radio" id="check-male" name="gender" checked />
+            <label for="check-male">male</label>
+          </div>
+          <div class="gender">
+            <input type="radio" id="check-female" name="gender" />
+            <label for="check-female">Female</label>
+          </div>
+          <div class="gender">
+            <input type="radio" id="check-other" name="gender" />
+            <label for="check-other">prefer not to say</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="input-box address">
+        <label>Address</label>
+        <input type="text" placeholder="Enter street address" required />
+        <input type="text" placeholder="Enter street address line 2" required />
         <div class="column">
-          <div class="input-box">
-            <label>Phone Number</label>
-            <input type="number" placeholder="Enter phone number" required />
+          <div class="select-box">
+            <select>
+              <option hidden>Country</option>
+              <option>America</option>
+              <option>Japan</option>
+              <option>India</option>
+              <option>Nepal</option>
+            </select>
           </div>
-          <div class="input-box">
-            <label>Birth Date</label>
-            <input type="date" placeholder="Enter birth date" required />
-          </div>
+          <input type="text" placeholder="Enter your city" required />
         </div>
-        <div class="gender-box">
-          <h3>Gender</h3>
-          <div class="gender-option">
-            <div class="gender">
-              <input type="radio" id="check-male" name="gender" checked />
-              <label for="check-male">male</label>
-            </div>
-            <div class="gender">
-              <input type="radio" id="check-female" name="gender" />
-              <label for="check-female">Female</label>
-            </div>
-            <div class="gender">
-              <input type="radio" id="check-other" name="gender" />
-              <label for="check-other">prefer not to say</label>
-            </div>
-          </div>
+        <div class="column">
+          <input type="text" placeholder="Enter your region" required />
+          <input type="number" placeholder="Enter postal code" required />
         </div>
-        <div class="input-box address">
-          <label>Address</label>
-          <input type="text" placeholder="Enter street address" required />
-          <input type="text" placeholder="Enter street address line 2" required />
-          <div class="column">
-            <div class="select-box">
-              <select>
-                <option hidden>Country</option>
-                <option>America</option>
-                <option>Japan</option>
-                <option>India</option>
-                <option>Nepal</option>
-              </select>
-            </div>
-            <input type="text" placeholder="Enter your city" required />
-          </div>
-          <div class="column">
-            <input type="text" placeholder="Enter your region" required />
-            <input type="number" placeholder="Enter postal code" required />
-          </div>
-        </div>
-        <button>Submit</button>
-      </form>
-    </section>
-  </body>
+      </div>
+
+      <button type="submit">Submit</button>
+    </form>
+  </section>
+
+  <script>
+    function validateForm(event) {
+      event.preventDefault(); // Prevents the default form submission behavior
+
+      var email = document.getElementById("email").value;
+      var phone = document.getElementById("phone").value;
+
+      var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      var phoneRegex = /^\d{10}$/;
+
+      var isValid = true;
+
+      // Email validation
+      if (!emailRegex.test(email)) {
+        document.getElementById("email-error").innerHTML = "Enter a valid email address";
+        isValid = false;
+      } else {
+        document.getElementById("email-error").innerText = "";
+      }
+
+      // Phone number validation
+      if (!phoneRegex.test(phone)) {
+        document.getElementById("phone-error").innerHTML = "Enter a valid phone number (10 digits)";
+        isValid = false;
+      } else {
+        document.getElementById("phone-error").innerHTML = "";
+      }
+
+      return isValid;
+    }
+  </script>
+</body>
 </html>
